@@ -23,14 +23,17 @@ class ArticleController extends AbstractController
     // $em ->persist($article);
     // $em ->flush();
 
-    $getArticle : $em ->getRepository(Article::class)->findOneBy([
+    $getArticle = $em->getRepository(Article::class)->findOneBy([
         'id'=>1
     ]);
 
     //return new Response('Article was created');
 
+        $em ->remove($getArticle);
+        $em ->flush();
+
        return $this->render('article/index.html.twig', [
-            'article' => '$getArticle',
+            'article' => $getArticle
         ]);
 
     }
